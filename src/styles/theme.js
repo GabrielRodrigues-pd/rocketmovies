@@ -5,8 +5,8 @@ export default {
     BG: '#1C1B1E',
 
     WHITE: '#F4EDE8',
-    PINK: '#FF859B',
-    PINK_LIGHT: 'rgba(255, 133, 155, 0.05)',
+    PINK: '#0fea97',
+    PINK_LIGHT: 'rgba(15, 234, 151, 0.05)',
 
     GRAY_100: '#3E3B47',
     GRAY_300: '#948F99',
