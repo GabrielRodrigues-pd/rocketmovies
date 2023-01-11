@@ -1,4 +1,4 @@
-import { useState} from "react"
+import { useState, useEffect} from "react"
 import { Container, Form, Background } from "./styles"
 
 import {api} from '../../services/api'
@@ -12,6 +12,7 @@ export function SignUp() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [title, setTitle] = useState("Crie sua conta")
 
   function handleSignUp(){
     if(!name || !email || !password){
@@ -31,13 +32,26 @@ export function SignUp() {
     })
   }
 
+  useEffect(() => {
+    if(!name){
+      setTitle("Insira o nome")
+    }else if(!email){
+      setTitle("Insira o email")
+    }else if(!password){
+      setTitle("Insira a senha")
+    }else{
+      setTitle("Crie sua conta")
+    }
+
+  }, [name, email, password, setTitle])
+
 
   return (
     <Container>
       <Form>
         <h1>Rocket Notes</h1>
         <p>Aplicação para salvar e gerenciar seus links úteis</p>
-        <h2>Crie sua conta</h2>
+        <h2>{title}</h2>
 
         <Input
           placeholder='Nome'

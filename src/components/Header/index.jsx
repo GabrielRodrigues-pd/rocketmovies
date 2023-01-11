@@ -1,9 +1,21 @@
 import { Container, Profile } from './styles'
 import { Link } from 'react-router-dom'
+import {useAuth} from '../../hooks/auth'
+
 
 import {Input} from '../../components/Input'
+import { ButtonOut } from '../ButtonOut'
 
 export function Header() {
+  const {signOut} = useAuth()
+
+  function handleSigOut() {
+    const confirmSignOut =confirm("Deseja desconectar?")  
+    if(confirmSignOut){
+      signOut()
+    }
+  }
+
   return(
     <Container>
 
@@ -12,7 +24,7 @@ export function Header() {
       <Profile >
         <div>
           <Link to="/profile" className='name'>Gabriel Rodrigues</Link>
-          <Link to="/preview">Sair</Link> 
+          <ButtonOut title="Sair" onClick={handleSigOut}></ButtonOut>
         </div> 
         <Link to="/profile" className='linkImg'>
           <img 

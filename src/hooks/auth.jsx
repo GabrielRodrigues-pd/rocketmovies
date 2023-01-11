@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from 'react'
+import {createContext, useContext, useState, useEffect} from 'react'
 
 import { api } from '../services/api'
 
@@ -13,6 +13,9 @@ function AuthProvider({children}) {
       const response = await api.post("/sessions", {email, password})
       const {user, token} = response.data
 
+      localStorage.setItem("@rocketmovies:user", JSON.stringify(user))
+      localStorage.setItem("@rocketmovies:token", token)
+
       api.defaults.headers.authorization = `Bearer ${token}`
       setData({user, token})
 
@@ -23,11 +26,35 @@ function AuthProvider({children}) {
         alert("Não foi possível entrar.")
       }
     }
-
   }
 
+  function signOut() {
+    localStorage.removeItem('@rocketmovies:user')
+    localStorage.removeItem('@rocketmovies:token')
+
+    setData({})
+  }
+
+  useEffect(() => {
+    const user = localStorage.getItem('@rocketmovies:user')
+    const token = localStorage.getItem('@rocketmovies:token')
+
+    if(token && user){
+      api.defaults.headers.authorization = `Bearer ${token}`
+
+      setData({
+        token,
+        user: JSON.parse(user)
+      })
+    }
+  }, [])
+
   return (
-    <AuthContext.Provider value={{signIn, user: data.user}}>
+    <AuthContext.Provider value={{
+        signIn, 
+        user: data.user,
+        signOut 
+      }}>
       {children}
     </AuthContext.Provider>
   )

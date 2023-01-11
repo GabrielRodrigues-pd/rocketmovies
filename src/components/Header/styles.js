@@ -35,6 +35,7 @@ export const Profile = styled.div`
     display: flex;
     flex-direction: column;
     margin-right: 16px;
+    align-items: flex-end;
     text-align: right;
     width: 190px;
 
