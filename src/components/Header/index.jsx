@@ -7,7 +7,7 @@ import {Input} from '../../components/Input'
 import { ButtonOut } from '../ButtonOut'
 
 export function Header() {
-  const {signOut} = useAuth()
+  const {signOut, user} = useAuth()
 
   function handleSigOut() {
     const confirmSignOut =confirm("Deseja desconectar?")  
@@ -23,7 +23,7 @@ export function Header() {
       <Input placeholder="Pesquisar pelo título" />
       <Profile >
         <div>
-          <Link to="/profile" className='name'>Gabriel Rodrigues</Link>
+          <Link to="/profile" className='name'>{user.name}</Link>
           <ButtonOut title="Sair" onClick={handleSigOut}></ButtonOut>
         </div> 
         <Link to="/profile" className='linkImg'>
