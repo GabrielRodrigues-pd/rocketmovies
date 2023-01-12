@@ -1,13 +1,17 @@
 import { Container, Profile } from './styles'
 import { Link } from 'react-router-dom'
 import {useAuth} from '../../hooks/auth'
+import {api} from '../../services/api'
 
+import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
 
 import {Input} from '../../components/Input'
 import { ButtonOut } from '../ButtonOut'
 
 export function Header() {
   const {signOut, user} = useAuth()
+
+  const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
 
   function handleSigOut() {
     const confirmSignOut =confirm("Deseja desconectar?")  
@@ -28,8 +32,8 @@ export function Header() {
         </div> 
         <Link to="/profile" className='linkImg'>
           <img 
-            src="https:/github.com/gabrielrodrigues-pd.png" 
-            alt="Imagem do usuário" 
+            src={avatarUrl} 
+            alt={user.name} 
           />
         </Link> 
         
