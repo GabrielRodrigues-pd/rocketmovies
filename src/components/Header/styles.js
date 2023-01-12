@@ -16,6 +16,7 @@ export const Container = styled.header`
     margin-right: 64px;
     font-weight: 500;
     color: ${({ theme }) => theme.COR.PINK};
+    cursor: pointer;
   }
 `
 export const Profile = styled.div`

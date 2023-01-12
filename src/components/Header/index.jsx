@@ -1,6 +1,7 @@
 import { Container, Profile } from './styles'
 import { Link } from 'react-router-dom'
 import {useAuth} from '../../hooks/auth'
+import { useNavigate } from 'react-router-dom'
 import {api} from '../../services/api'
 
 import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
@@ -10,8 +11,13 @@ import { ButtonOut } from '../ButtonOut'
 
 export function Header() {
   const {signOut, user} = useAuth()
+  const navigate = useNavigate()
 
   const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
+
+  function handleBack() {
+    navigate(-1)
+  }
 
   function handleSigOut() {
     const confirmSignOut =confirm("Deseja desconectar?")  
@@ -23,7 +29,7 @@ export function Header() {
   return(
     <Container>
 
-      <h2>RocketMovies</h2>
+      <h2 onClick={handleBack}>RocketMovies</h2>
       <Input placeholder="Pesquisar pelo título" />
       <Profile >
         <div>
