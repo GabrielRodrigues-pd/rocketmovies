@@ -88,6 +88,12 @@ export const SectionCont = styled.section`
       font-size: 36px;
     }
 
+    span {
+      color: ${({ theme }) => theme.COR.PINK};
+      font-size: 20px;
+      border-radius: 10px;
+    }
+
     svg {
       width: 20px;
       height: 20px;

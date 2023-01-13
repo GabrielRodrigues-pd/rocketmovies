@@ -1,16 +1,16 @@
 import { Container, Profile } from './styles'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {useAuth} from '../../hooks/auth'
-import { useNavigate } from 'react-router-dom'
 import {api} from '../../services/api'
 
 import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
 
 import {Input} from '../../components/Input'
 import { ButtonOut } from '../ButtonOut'
+import { useState } from 'react'
 
-export function Header() {
-  const {signOut, user} = useAuth()
+export function Header({ ...rest}) {
+  const {signOut, user, handleSearch} = useAuth()
   const navigate = useNavigate()
 
   const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
@@ -19,22 +19,42 @@ export function Header() {
     navigate(-1)
   }
 
-  function handleSigOut() {
+  function handleSignOut() {
     const confirmSignOut =confirm("Deseja desconectar?")  
     if(confirmSignOut){
       signOut()
     }
   }
 
+  const [search, setSearch] = useState("")
+  const [state, setState] = useState('Enter');
+
+  function leveSearch(){
+    handleSearch(search)
+    console.log(search);
+  }
+
+  function moveSearch(event) {
+    setState(event.key)
+    if(state == 'Enter'){
+      leveSearch()
+    }
+  }
+  
   return(
-    <Container>
+    <Container {...rest}>
 
       <h2 onClick={handleBack}>RocketMovies</h2>
-      <Input placeholder="Pesquisar pelo título" />
+      <Input 
+        placeholder="Pesquisar pelo título" 
+        type="text"
+        onChange={(e) => setSearch(e.target.value)}
+        onKeyPress={(e) => moveSearch(e)}
+      />
       <Profile >
         <div>
           <Link to="/profile" className='name'>{user.name}</Link>
-          <ButtonOut title="Sair" onClick={handleSigOut}></ButtonOut>
+          <ButtonOut title="Sair" onClick={handleSignOut}></ButtonOut>
         </div> 
         <Link to="/profile" className='linkImg'>
           <img 

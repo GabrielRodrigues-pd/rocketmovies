@@ -6,6 +6,7 @@ export const AuthContext = createContext({})
 
 function AuthProvider({children}) {
   const [data, setData] = useState({})
+  const [movieSearch, setMovieSearch] = useState([])
 
   async function signIn({email, password}){
 
@@ -65,6 +66,12 @@ function AuthProvider({children}) {
     }
   }
 
+  async function handleSearch(search) {
+    const response = await api.get(`/movies?title=${search}`)
+      setMovieSearch(response.data)
+  }
+
+
   useEffect(() => {
     const user = localStorage.getItem('@rocketmovies:user')
     const token = localStorage.getItem('@rocketmovies:token')
@@ -86,6 +93,8 @@ function AuthProvider({children}) {
         user: data.user,
         signOut,
         updateProfile,
+        handleSearch,
+        movieSearch
       }}>
       {children}
     </AuthContext.Provider>

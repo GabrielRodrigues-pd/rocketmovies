@@ -1,4 +1,8 @@
 import { Container, NewNote, Section } from './styles'
+import {useAuth} from '../../hooks/auth'
+import { api } from '../../services/api'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 import { FiPlus } from 'react-icons/fi'
@@ -8,6 +12,16 @@ import { Button } from '../../components/Button'
 import { Card } from '../../components/Card'
 
 export function Home() {
+
+  const {movieSearch} = useAuth()
+  
+  const navigate = useNavigate()
+
+  function handlePreview(id) {
+    navigate(`/preview/${id}`)
+  }
+
+
 
   return (
     <Container>
@@ -24,11 +38,14 @@ export function Home() {
         </div>
 
         <Section>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
-          <Card/>
+          {movieSearch.map((movie) => (
+            <Card
+              key={String(movie.id)}
+              data={movie}
+              onClick={() => handlePreview(movie.id)}
+            />
+          ))
+          }
         </Section>
 
       </main>

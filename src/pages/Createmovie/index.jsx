@@ -1,5 +1,5 @@
 import { Container, Main, Section } from "./styles";
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 
 import {Header} from '../../components/Header'
 import {ButtonText} from '../../components/ButtonText'
@@ -17,6 +17,8 @@ export function CreateMovie(){
 
   const [tags, setTags] = useState([])
   const [newTag, setNewTag] = useState("")
+  const [titleMovie, setTitleMovie] = useState("Novo filme")
+  const [corTitle, setCorTitle] = useState('white')
 
   function handleAddTag(){
     if(!newTag) {
@@ -31,12 +33,13 @@ export function CreateMovie(){
   }
 
   async function handleNewMovie(){
+
     if (!title) {
       return alert("Digite o título do filme")
     }
 
-    if(!rating) {
-      return alert('Digite a nota do filme')
+    if(!rating || Number(rating) > 5) {
+      return alert('Digite a nota do filme de 0 a 5')
     }
 
     if (newTag) {
@@ -50,23 +53,22 @@ export function CreateMovie(){
       tags
     })
 
-    console.log({
-      title,
-      description,
-      rating,
-      tags
-    });
-
     alert('Nota criada com sucesso!')
   }
+
+  useEffect(() => {
+    if(Number(rating) > 5){
+      setTitleMovie("A avaliação do filme é de 0 a 5")
+    }else{
+      setTitleMovie("Novo filme")
+    }
+  }, [rating])
 
   return (
     <Container>
       <Header/>
       <Main>
-
-        {/* <ButtonText to='/' title="Voltar" /> */}
-        <h1>Novo filme</h1>
+        <h1>{titleMovie}</h1>
 
         <div className="input">
           <Input 

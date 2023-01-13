@@ -16,6 +16,12 @@ export const Preview = styled(Link)`
     color: ${({ theme }) => theme.COR.WHITE};
   }
 
+  > span {
+    color: ${({ theme }) => theme.COR.PINK};
+    font-size: 20px;
+    border-radius: 10px;
+  }
+
   > div {
     position: relative;
     display: flex;
