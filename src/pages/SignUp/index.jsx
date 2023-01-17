@@ -19,6 +19,7 @@ export function SignUp() {
       return alert('Informe corretamente o nome, email e senha')
     }
 
+
     api.post('/users', {name, email, password})
     .then(() => {
       alert('Usuário cadastrado com sucesso!')
@@ -30,6 +31,7 @@ export function SignUp() {
         alert('Não foi possível cadastrar')
       }
     })
+
   }
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export function SignUp() {
 
         <Button title="Cadastrar" onClick={handleSignUp} disabled={
           !email || !password || !name
-        }/>
+        } />
         
         <Link to='/'>
           <FiArrowLeft/>

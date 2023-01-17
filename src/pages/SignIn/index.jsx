@@ -15,10 +15,11 @@ export function SignIn(){
   const [password, setPassword] = useState("")
 
   const {signIn} = useAuth()
-
+  
   function handleSignIn(){
     signIn({email, password})
   }
+
 
   return(
     <Container>
@@ -41,7 +42,11 @@ export function SignIn(){
           onChange={e => setPassword(e.target.value)}
         />
 
-        <Button title='Entrar' onClick={handleSignIn} disabled={!email || !password}/>
+        <Button 
+          title='Entrar' 
+          onClick={handleSignIn} 
+          disabled={!email || !password}
+        />
 
         <Link to="/register">
           Criar conta

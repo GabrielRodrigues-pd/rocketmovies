@@ -9,8 +9,7 @@ import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
 import {Star} from '../../components/Star' 
 import {Tag} from '../../components/Tags'
 import {Header} from '../../components/Header'
-
-
+import { Button } from "../../components/Button";
 import {ButtonText} from '../../components/ButtonText'
 
 import {MdOutlineWatchLater} from 'react-icons/md'
@@ -30,6 +29,15 @@ export function Preview(){
   function handleBack() {
     navigate('/')
   }
+
+  async function handleRemove() {
+    const confirm = window.confirm("Deseja realmente remover a nota?")
+
+    if(confirm){
+      await api.delete(`/movies/${params.id}`)
+      navigate(-2)
+    }
+  }
   
   useEffect(() => {
     async function fetchMovie() {
@@ -45,12 +53,13 @@ export function Preview(){
       <Header />
       {data && (
         <Main>
-        <ButtonText onClick={handleBack} title='Voltar'/>
+        <ButtonText onClick={handleBack} title='Voltar' isIcon={true}/>
 
         <SectionCont>
           <div>
             <h1>{data.title}</h1>
             <span>Avaliação: {data.rating}</span>
+            
           </div>
 
           <Infomovie>
@@ -73,7 +82,9 @@ export function Preview(){
             <p>
               {data.description}
             </p>
+          <ButtonText title="Excluir filme" onClick={handleRemove}/> 
           </Content>
+
         </SectionCont>
 
         
