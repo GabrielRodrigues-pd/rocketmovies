@@ -27,16 +27,14 @@ export function Header({ ...rest}) {
   }
 
   const [search, setSearch] = useState("")
-  const [state, setState] = useState('Enter');
-
+  
   function leveSearch(){
     handleSearch(search)
-    console.log(search);
   }
 
+
   function moveSearch(event) {
-    setState(event.key)
-    if(state == 'Enter'){
+    if(event.key == 'Enter'){
       leveSearch()
     }
   }

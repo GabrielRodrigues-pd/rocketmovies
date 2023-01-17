@@ -71,7 +71,6 @@ function AuthProvider({children}) {
       setMovieSearch(response.data)
   }
 
-
   useEffect(() => {
     const user = localStorage.getItem('@rocketmovies:user')
     const token = localStorage.getItem('@rocketmovies:token')
@@ -94,7 +93,8 @@ function AuthProvider({children}) {
         signOut,
         updateProfile,
         handleSearch,
-        movieSearch
+        movieSearch,
+        setMovieSearch
       }}>
       {children}
     </AuthContext.Provider>

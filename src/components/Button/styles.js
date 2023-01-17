@@ -15,4 +15,17 @@ export const Container = styled.button`
   &:disabled {
     opacity: 0.5;
   }
+
+  > svg {
+    animation: spin 0.2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `

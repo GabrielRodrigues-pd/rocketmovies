@@ -18,7 +18,7 @@ export function CreateMovie(){
   const [tags, setTags] = useState([])
   const [newTag, setNewTag] = useState("")
   const [titleMovie, setTitleMovie] = useState("Novo filme")
-  const [corTitle, setCorTitle] = useState('white')
+  const [loading, setLoading] = useState(false)
 
   function handleAddTag(){
     if(!newTag) {
@@ -46,6 +46,8 @@ export function CreateMovie(){
       return alert("Você deixou uma tag no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio")
     }
 
+    setLoading(true)
+    
     await api.post('/movies', {
       title,
       description,
@@ -54,6 +56,9 @@ export function CreateMovie(){
     })
 
     alert('Nota criada com sucesso!')
+
+    setLoading(false)
+
   }
 
   useEffect(() => {
@@ -109,7 +114,7 @@ export function CreateMovie(){
           </div>
           <footer>
             <Button title="Excluir filme"/>
-            <Button title="Salvar alterações" onClick={handleNewMovie}/>
+            <Button title="Salvar alterações" onClick={handleNewMovie} loading={loading}/>
           </footer>
         </Section>
 

@@ -28,7 +28,7 @@ export const Profile = styled.div`
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      border: 1px solid ${({ theme }) => theme.COR.GRAY_100};
+      border: 3px solid ${({ theme }) => theme.COR.GRAY_100};
     }
   }
 

@@ -11,6 +11,7 @@ import {Button} from '../../components/Button'
 import {ButtonText} from '../../components/ButtonText'
 import { FiUser, FiMail, FiLock, FiCamera } from "react-icons/fi"
 
+
 export function Profile() {
   const {user, updateProfile} = useAuth()
 
@@ -24,6 +25,7 @@ export function Profile() {
 
   const [avatar, setAvatar] = useState(avatarUrl)
   const [avatarFile, setAvatarFile] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   async function handleUpdate(){
     const updated = {
@@ -35,7 +37,11 @@ export function Profile() {
 
     const userUpdated = Object.assign(user, updated)
 
+    setLoading(true)
+
     await updateProfile({user: userUpdated, avatarFile})
+
+    setLoading(false)
   }
 
   function handleChangeAvatar(event) {
@@ -101,7 +107,7 @@ export function Profile() {
           onChange={e => setPasswordNew(e.target.value)}
         /> 
 
-        <Button title='Salvar' onClick={handleUpdate} />
+        <Button title='Salvar' onClick={handleUpdate} loading={loading} />
       </Form>
     </Container>
   )

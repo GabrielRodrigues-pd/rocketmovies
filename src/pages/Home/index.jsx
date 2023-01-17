@@ -13,7 +13,7 @@ import { Card } from '../../components/Card'
 
 export function Home() {
 
-  const {movieSearch} = useAuth()
+  const {movieSearch, setMovieSearch} = useAuth()
 
   console.log(movieSearch);
   
@@ -23,6 +23,15 @@ export function Home() {
     navigate(`/preview/${id}`)
   }
 
+  useEffect(() => {
+
+    async function handlePreviMovies(){
+      const response = await api.get(`/movies?title=`)
+      setMovieSearch(response.data)
+    }
+    handlePreviMovies()
+    
+  }, [])
 
 
   return (
