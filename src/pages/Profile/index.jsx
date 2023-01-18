@@ -2,6 +2,8 @@ import { Container, Form, Avatar } from "./styles"
 import { useState } from "react"
 import {useAuth} from '../../hooks/auth'
 import { useNavigate } from "react-router-dom"
+import { toast } from 'react-toastify';
+
 
 import {api} from '../../services/api'
 import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
@@ -28,6 +30,22 @@ export function Profile() {
   const [loading, setLoading] = useState(false)
 
   async function handleUpdate(){
+    if(!name) {
+      return toast.error("Insira o nome para atualizar",{
+        position: toast.POSITION.TOP_CENTER
+      })
+    }
+    if(!email){
+      return toast.error("Insira o e-mail para atualizar", {
+        position: toast.POSITION.TOP_CENTER
+      })
+    }
+    if(passwordNew === passwordOld){
+      return toast.error("Verifique se inseriu a senha antiga corretamente e insira uma senha diferente da antiga", {
+        position: toast.POSITION.TOP_CENTER
+      })
+    }
+
     const updated = {
       name,
       email,
@@ -42,6 +60,7 @@ export function Profile() {
     await updateProfile({user: userUpdated, avatarFile})
 
     setLoading(false)
+    
   }
 
   function handleChangeAvatar(event) {

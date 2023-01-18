@@ -5,7 +5,7 @@ import { Star } from '../Star'
 export function Card({data, ...rest}) {
   return(
     <Container {...rest}>
-      <Preview to="preview">
+      <Preview>
         <h1>{data.title}</h1>
         <span>Avaliação: {data.rating}</span>
         

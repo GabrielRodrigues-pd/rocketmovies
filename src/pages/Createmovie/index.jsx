@@ -9,6 +9,7 @@ import {Textarea} from '../../components/Textarea'
 import { Marker } from '../../components/Marker'
 
 import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 export function CreateMovie(){
   const [title, setTitle] = useState("")
@@ -35,15 +36,21 @@ export function CreateMovie(){
   async function handleNewMovie(){
 
     if (!title) {
-      return alert("Digite o título do filme")
+      return toast.error("Digite o título do filme", {
+        position: toast.POSITION.TOP_CENTER
+      })
     }
 
-    if(!rating || Number(rating) > 5) {
-      return alert('Digite a nota do filme de 0 a 5')
+    if(!rating || Number(rating) > 5 || Number(rating < 0)) {
+      return toast.error('Digite a nota do filme de 0 a 5', {
+        position: toast.POSITION.TOP_CENTER
+      })
     }
 
-    if (newTag) {
-      return alert("Você deixou uma tag no campo para adicionar, mas não clicou em adicionar. Clique para adicionar ou deixe o campo vazio")
+    if (!newTag) {
+      return toast.error("Adicione uma tag ao seu filme", {
+        position: toast.POSITION.TOP_CENTER
+      })
     }
 
     setLoading(true)
@@ -55,15 +62,16 @@ export function CreateMovie(){
       tags
     })
 
-    alert('Nota criada com sucesso!')
+    toast.success('Nota criada com sucesso!', {
+      position: toast.POSITION.TOP_CENTER
+    })
 
     setLoading(false)
-
   }
 
   useEffect(() => {
     if(Number(rating) > 5){
-      setTitleMovie("A avaliação do filme é de 0 a 5")
+      toast.error("A avaliação do filme é de 0 a 5")
     }else{
       setTitleMovie("Novo filme")
     }

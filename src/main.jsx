@@ -2,8 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import GlobalStyles from './styles/global'
 import { ThemeProvider } from 'styled-components'
-
+import { ToastContainer } from 'react-toastify';
 import {AuthProvider} from './hooks/auth'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 import {Routes} from './routes'
 
@@ -17,5 +18,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes />
       </AuthProvider>
     </ThemeProvider>
+    <ToastContainer limit={3}/>
   </React.StrictMode>
 )

@@ -27,7 +27,7 @@ export function Preview(){
   const [avatar, setAvatar] = useState(avatarUrl)
 
   function handleBack() {
-    navigate('/')
+    navigate(-1)
   }
 
   async function handleRemove() {
@@ -35,7 +35,7 @@ export function Preview(){
 
     if(confirm){
       await api.delete(`/movies/${params.id}`)
-      navigate(-2)
+      navigate(-1)
     }
   }
   

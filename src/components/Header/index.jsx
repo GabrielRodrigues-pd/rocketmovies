@@ -16,13 +16,14 @@ export function Header({ ...rest}) {
   const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
 
   function handleBack() {
-    navigate(-1)
+    navigate('/')
   }
 
   function handleSignOut() {
     const confirmSignOut =confirm("Deseja desconectar?")  
     if(confirmSignOut){
       signOut()
+      handleBack()
     }
   }
 

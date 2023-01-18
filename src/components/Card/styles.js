@@ -8,7 +8,9 @@ export const Container = styled.div`
   border-radius: 16px;
   margin-bottom: 24px;
 `
-export const Preview = styled(Link)`
+export const Preview = styled.div`
+  cursor: pointer;
+
   > h1 {
     font-size: 24px;
     line-height: 30px;

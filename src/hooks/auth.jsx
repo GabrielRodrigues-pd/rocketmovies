@@ -1,4 +1,5 @@
 import {createContext, useContext, useState, useEffect} from 'react'
+import { toast } from 'react-toastify'
 
 import { api } from '../services/api'
 
@@ -7,6 +8,7 @@ export const AuthContext = createContext({})
 function AuthProvider({children}) {
   const [data, setData] = useState({})
   const [movieSearch, setMovieSearch] = useState([])
+
 
   async function signIn({email, password}){
 
@@ -34,6 +36,7 @@ function AuthProvider({children}) {
     localStorage.removeItem('@rocketmovies:token')
 
     setData({})
+
   }
 
   async function updateProfile({user, avatarFile}) {
@@ -55,13 +58,15 @@ function AuthProvider({children}) {
         user,
         token: data.token
       })
-      alert("Perfil atualizado!")
+      toast.success("Perfil atualizado!", {
+        position: toast.POSITION.TOP_CENTER
+      })
 
     }catch (error) {
       if(error.response){
         alert(error.response.data.message)
       } else {
-        alert("Não foi possível atualizar o perfil.")
+        toast.error("Não foi possível atualizar o perfil.")
       }
     }
   }
