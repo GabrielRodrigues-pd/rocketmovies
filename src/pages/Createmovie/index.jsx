@@ -122,7 +122,7 @@ export function CreateMovie(){
           </div>
           <footer>
             <Button title="Excluir filme"/>
-            <Button title="Salvar alterações" onClick={handleNewMovie} loading={loading}/>
+            <Button title="Criar filme" onClick={handleNewMovie} loading={loading}/>
           </footer>
         </Section>
 

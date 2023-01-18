@@ -13,6 +13,7 @@ import { Button } from "../../components/Button";
 import {ButtonText} from '../../components/ButtonText'
 
 import {MdOutlineWatchLater} from 'react-icons/md'
+import { toast } from "react-toastify";
 
 export function Preview(){
   const {user} = useAuth()
@@ -30,13 +31,10 @@ export function Preview(){
     navigate(-1)
   }
 
-  async function handleRemove() {
-    const confirm = window.confirm("Deseja realmente remover a nota?")
-
-    if(confirm){
-      await api.delete(`/movies/${params.id}`)
-      navigate(-1)
-    }
+  async function handleRemoveMovie(){
+    await api.delete(`/movies/${params.id}`)
+    toast.success("Filme excluído")
+    handleBack() 
   }
   
   useEffect(() => {
@@ -56,11 +54,14 @@ export function Preview(){
         <ButtonText onClick={handleBack} title='Voltar' isIcon={true}/>
 
         <SectionCont>
+          
           <div>
+            
             <h1>{data.title}</h1>
             <span>Avaliação: {data.rating}</span>
             
           </div>
+          <ButtonText title="Excluir filme" onClick={handleRemoveMovie}/> 
 
           <Infomovie>
             <img src={avatar} />
@@ -82,7 +83,6 @@ export function Preview(){
             <p>
               {data.description}
             </p>
-          <ButtonText title="Excluir filme" onClick={handleRemove}/> 
           </Content>
 
         </SectionCont>

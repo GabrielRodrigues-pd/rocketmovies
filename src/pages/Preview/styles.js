@@ -45,6 +45,7 @@ export const Content = styled.section`
   gap: 20px;
   overflow-y: auto;
   padding-right: 20px;
+  margin-bottom: 30px;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -75,6 +76,10 @@ export const SectionCont = styled.section`
   &::-webkit-scrollbar-thumb {
     background-color: ${({ theme }) => theme.COR.PINK};
     border-radius: 20px;
+  }
+
+  button {
+    font-size: 18px;
   }
 
   > div {
