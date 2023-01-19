@@ -14,8 +14,6 @@ import { Card } from '../../components/Card'
 export function Home() {
 
   const {movieSearch, setMovieSearch} = useAuth()
-
-  console.log(movieSearch);
   
   const navigate = useNavigate()
 

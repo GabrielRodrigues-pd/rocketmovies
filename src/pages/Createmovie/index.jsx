@@ -69,6 +69,14 @@ export function CreateMovie(){
     setLoading(false)
   }
 
+  function handleClearMovie(){
+    setTitle("")
+    setRating("")
+    setDescription("")
+    setTags([])
+    setNewTag("")
+  }
+
   useEffect(() => {
     if(Number(rating) > 5){
       toast.error("A avaliação do filme é de 0 a 5")
@@ -87,15 +95,18 @@ export function CreateMovie(){
           <Input 
             placeholder='Título'
             onChange={e => setTitle(e.target.value)}
+            value={title}
           />
           <Input 
             placeholder='Sua nota (de 0 a 5)'
             onChange={e => setRating(e.target.value)}
+            value={rating}
           />
         </div>
         <Textarea 
           placeholder='Observações'
           onChange={e => setDescription(e.target.value)}
+          value={description}
         />
 
         <Section>
@@ -108,8 +119,7 @@ export function CreateMovie(){
                   key={String(index)}
                   onClick={() => {handleRemoveTag(tag)}}
                 />
-              ))
-               
+              )) 
             }
 
             <Marker 
@@ -121,7 +131,7 @@ export function CreateMovie(){
             /> 
           </div>
           <footer>
-            <Button title="Excluir filme"/>
+            <Button title="Excluir filme" onClick={handleClearMovie}/>
             <Button title="Criar filme" onClick={handleNewMovie} loading={loading}/>
           </footer>
         </Section>

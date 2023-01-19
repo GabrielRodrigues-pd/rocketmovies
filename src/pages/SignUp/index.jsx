@@ -2,6 +2,7 @@ import { useState, useEffect} from "react"
 import { Container, Form, Background } from "./styles"
 
 import {api} from '../../services/api'
+import { toast } from "react-toastify"
 
 import {FiUser, FiMail, FiLock, FiArrowLeft } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
@@ -16,22 +17,27 @@ export function SignUp() {
 
   function handleSignUp(){
     if(!name || !email || !password){
-      return alert('Informe corretamente o nome, email e senha')
+      return toast.error('Informe corretamente o nome, email e senha')
     }
 
 
     api.post('/users', {name, email, password})
     .then(() => {
-      alert('Usuário cadastrado com sucesso!')
+      toast.success('Usuário cadastrado com sucesso!', {
+        position: toast.POSITION.TOP_CENTER
+      })
     })
     .catch(error => {
       if(error.response){
-        alert(error.response.data.message)
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER
+        })
       }else{
-        alert('Não foi possível cadastrar')
+        toast.error('Não foi possível cadastrar', {
+          position: toast.POSITION.TOP_CENTER
+        })
       }
     })
-
   }
 
   useEffect(() => {

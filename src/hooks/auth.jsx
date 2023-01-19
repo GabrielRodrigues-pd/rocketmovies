@@ -21,12 +21,20 @@ function AuthProvider({children}) {
 
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       setData({user, token})
+      toast.success(`Seja bem-vindo ${user.name}`, {
+        position: toast.POSITION.TOP_CENTER,
+        theme: 'colored'
+      })
 
     } catch (error) {
       if(error.response){
-        alert(error.response.data.message)
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER 
+        })
       } else {
-        alert("Não foi possível entrar.")
+        toast.error("Não foi possível entrar.", {
+          position: toast.POSITION.TOP_CENTER
+        })
       }
     }
   }

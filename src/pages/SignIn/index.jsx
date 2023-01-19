@@ -8,6 +8,7 @@ import { Link } from "react-router-dom"
 
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
+import { toast } from "react-toastify"
 
 export function SignIn(){
 
@@ -19,6 +20,8 @@ export function SignIn(){
   function handleSignIn(){
     signIn({email, password})
   }
+
+
 
 
   return(

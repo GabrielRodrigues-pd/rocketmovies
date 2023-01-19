@@ -40,7 +40,7 @@ export function Profile() {
         position: toast.POSITION.TOP_CENTER
       })
     }
-    if(passwordNew === passwordOld){
+    if(passwordNew > 0 && passwordOld > 0 && passwordNew === passwordOld){
       return toast.error("Verifique se inseriu a senha antiga corretamente e insira uma senha diferente da antiga", {
         position: toast.POSITION.TOP_CENTER
       })
