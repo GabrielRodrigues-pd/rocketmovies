@@ -25,8 +25,8 @@ export const Profile = styled.div`
 
   .linkImg {
     img {
-      width: 56px;
-      height: 56px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       border: 3px solid ${({ theme }) => theme.COR.GRAY_100};
     }
