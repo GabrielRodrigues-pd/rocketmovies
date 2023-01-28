@@ -28,7 +28,6 @@ export function Home() {
       setExistFilme('Você não tem filmes cadastrados')
     }
   }, [movieSearch])
-  console.log(movieSearch);
 
   useEffect(() => {
 
