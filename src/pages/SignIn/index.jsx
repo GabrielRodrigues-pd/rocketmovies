@@ -9,19 +9,18 @@ import { Link } from "react-router-dom"
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
 import { toast } from "react-toastify"
+import { useEffect } from "react"
 
 export function SignIn(){
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const {signIn} = useAuth()
+  const {signIn, loading} = useAuth()
   
   function handleSignIn(){
     signIn({email, password})
   }
-
-
 
 
   return(
@@ -49,6 +48,7 @@ export function SignIn(){
           title='Entrar' 
           onClick={handleSignIn} 
           disabled={!email || !password}
+          loading={loading}
         />
 
         <Link to="/register">

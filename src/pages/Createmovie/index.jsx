@@ -59,7 +59,6 @@ export function CreateMovie(){
         position: toast.POSITION.TOP_CENTER
       })
     }
-    console.log(newTag);
 
     setLoading(true)
     

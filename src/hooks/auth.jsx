@@ -8,11 +8,13 @@ export const AuthContext = createContext({})
 function AuthProvider({children}) {
   const [data, setData] = useState({})
   const [movieSearch, setMovieSearch] = useState([])
+  const [loading, setLoading] = useState(false)
 
 
   async function signIn({email, password}){
 
     try {
+      setLoading(true)
       const response = await api.post("/sessions", {email, password})
       const {user, token} = response.data
 
@@ -25,16 +27,19 @@ function AuthProvider({children}) {
         position: toast.POSITION.TOP_CENTER,
         theme: 'colored'
       })
+      setLoading(false)
 
     } catch (error) {
       if(error.response){
         toast.error(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER 
         })
+        setLoading(false)
       } else {
         toast.error("Não foi possível entrar.", {
           position: toast.POSITION.TOP_CENTER
         })
+        setLoading(false)
       }
     }
   }
@@ -102,6 +107,7 @@ function AuthProvider({children}) {
   return (
     <AuthContext.Provider value={{
         signIn, 
+        loading,
         user: data.user,
         signOut,
         updateProfile,

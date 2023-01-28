@@ -14,8 +14,10 @@ export function SignUp() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [title, setTitle] = useState("Crie sua conta")
+  const [loading, setLoading] = useState(false)
 
   function handleSignUp(){
+    setLoading(true)
     if(!name || !email || !password){
       return toast.error('Informe corretamente o nome, email e senha')
     }
@@ -26,16 +28,19 @@ export function SignUp() {
       toast.success('Usuário cadastrado com sucesso!', {
         position: toast.POSITION.TOP_CENTER
       })
+      setLoading(false)
     })
     .catch(error => {
       if(error.response){
         toast.error(error.response.data.message, {
           position: toast.POSITION.TOP_CENTER
         })
+        setLoading(false)
       }else{
         toast.error('Não foi possível cadastrar', {
           position: toast.POSITION.TOP_CENTER
         })
+        setLoading(false)
       }
     })
   }
@@ -80,9 +85,15 @@ export function SignUp() {
           onChange={e => setPassword(e.target.value)}
         />
 
-        <Button title="Cadastrar" onClick={handleSignUp} disabled={
-          !email || !password || !name
-        } />
+        <Button 
+          title="Cadastrar" 
+          onClick={handleSignUp}
+          loading={loading} 
+          disabled={
+            !email || !password || !name
+          } 
+
+        />
         
         <Link to='/'>
           <FiArrowLeft/>
