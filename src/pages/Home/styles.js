@@ -13,7 +13,7 @@ export const Container = styled.div`
   > main {
     padding: 0 123px;
     grid-area: content;
-    overflow-y: auto;
+    overflow-y: hidden;
 
     .header {
       margin-top: 50px;
