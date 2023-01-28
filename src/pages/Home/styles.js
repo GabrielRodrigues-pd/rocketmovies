@@ -53,6 +53,7 @@ export const Section = styled.section`
   overflow-y: scroll;
   max-height: 500px;
   padding-right: 20px;
+  padding-bottom: 200px;
 
   &::-webkit-scrollbar {
     width: 8px;
