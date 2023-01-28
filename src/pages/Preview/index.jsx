@@ -33,7 +33,9 @@ export function Preview(){
 
   async function handleRemoveMovie(){
     await api.delete(`/movies/${params.id}`)
-    toast.success("Filme excluído")
+    toast.success("Filme excluído", {
+      position: toast.POSITION.TOP_CENTER
+    })
     handleBack() 
   }
   

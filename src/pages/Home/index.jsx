@@ -14,12 +14,21 @@ import { Card } from '../../components/Card'
 export function Home() {
 
   const {movieSearch, setMovieSearch} = useAuth()
-  
+  const [existFilme, setExistFilme] = useState('Meus filmes')
   const navigate = useNavigate()
 
   function handlePreview(id) {
     navigate(`/preview/${id}`)
   }
+
+  useEffect(() => {
+    if(movieSearch.length > 0) {
+      setExistFilme('Meus filmes')
+    }else{
+      setExistFilme('Você não tem filmes cadastrados')
+    }
+  }, [movieSearch])
+  console.log(movieSearch);
 
   useEffect(() => {
 
@@ -38,7 +47,7 @@ export function Home() {
 
       <main>
         <div className='header'>
-          <h1>Meus filmes</h1>
+          <h1>{existFilme}</h1>
 
           <NewNote to='/createmovie'>
             <FiPlus/>

@@ -1,5 +1,6 @@
 import { Container, Main, Section } from "./styles";
 import {useEffect, useState} from 'react'
+import { useNavigate } from "react-router-dom";
 
 import {Header} from '../../components/Header'
 import {ButtonText} from '../../components/ButtonText'
@@ -20,6 +21,12 @@ export function CreateMovie(){
   const [newTag, setNewTag] = useState("")
   const [titleMovie, setTitleMovie] = useState("Novo filme")
   const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
+
+  function handleBack() {
+    navigate(-1)
+  }
 
   function handleAddTag(){
     if(!newTag) {
@@ -47,11 +54,12 @@ export function CreateMovie(){
       })
     }
 
-    if (!newTag) {
+    if (newTag) {
       return toast.error("Adicione uma tag ao seu filme", {
         position: toast.POSITION.TOP_CENTER
       })
     }
+    console.log(newTag);
 
     setLoading(true)
     
@@ -65,6 +73,8 @@ export function CreateMovie(){
     toast.success('Nota criada com sucesso!', {
       position: toast.POSITION.TOP_CENTER
     })
+
+    handleBack()
 
     setLoading(false)
   }

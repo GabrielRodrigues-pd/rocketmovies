@@ -45,7 +45,7 @@ export function Header({ ...rest}) {
 
       <h2 onClick={handleBack}>RocketMovies</h2>
       <Input 
-        placeholder="Pesquisar pelo título" 
+        placeholder="Pesquisar pelo título ou tag (Pressione Enter para pesquisar)" 
         type="text"
         onChange={(e) => setSearch(e.target.value)}
         onKeyPress={(e) => moveSearch(e)}
